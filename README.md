@@ -4,7 +4,7 @@ An agentic RAG system built on LangChain and LangGraph. Instead of a single agen
 which tool to reach for, a **supervisor agent** inspects each question and routes it to the
 right specialized worker — a FAISS-backed document retriever, Wikipedia, the GitHub API, or a
 PostgreSQL dataset — then synthesizes a final answer. Every run is fully traced in
-[Langfuse](https://langfuse.com), and a golden-dataset evaluation harness scores answers on
+**Langfuse**, and a golden-dataset evaluation harness scores answers on
 accuracy, retrieval relevance, correctness, and faithfulness using LLM-as-judge metrics.
 
 ## How it works
