@@ -1,0 +1,189 @@
+{
+  "description": "Golden QA dataset for evaluating the Agentic RAG system over data/*.pdf. expected_pages are 1-indexed PDF page numbers where the answer is grounded.",
+  "items": [
+    {
+      "id": "attn-001",
+      "question": "What is the title of the paper and what architecture does it introduce?",
+      "expected_answer": "The paper is 'Attention Is All You Need,' which introduces the Transformer, a network architecture based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+      "source_document": "attention.pdf",
+      "expected_pages": [1],
+      "category": "overview"
+    },
+    {
+      "id": "attn-002",
+      "question": "Who are the authors of the paper and what organizations are they affiliated with?",
+      "expected_answer": "Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Lukasz Kaiser, and Illia Polosukhin, affiliated with Google Brain, Google Research, and the University of Toronto.",
+      "source_document": "attention.pdf",
+      "expected_pages": [1],
+      "category": "metadata"
+    },
+    {
+      "id": "attn-003",
+      "question": "What BLEU score does the Transformer (big) model achieve on the WMT 2014 English-to-German translation task, and how does it compare to prior results?",
+      "expected_answer": "28.4 BLEU, a new state-of-the-art that improves over the existing best results (including ensembles) by more than 2 BLEU.",
+      "source_document": "attention.pdf",
+      "expected_pages": [1, 8],
+      "category": "results"
+    },
+    {
+      "id": "attn-004",
+      "question": "How long did it take to train the model that achieved the new single-model state-of-the-art on the WMT 2014 English-to-French task, and on what hardware?",
+      "expected_answer": "3.5 days on eight GPUs.",
+      "source_document": "attention.pdf",
+      "expected_pages": [1],
+      "category": "results"
+    },
+    {
+      "id": "attn-005",
+      "question": "How many identical layers make up the Transformer's encoder, and what is the model's embedding/output dimension (d_model)?",
+      "expected_answer": "N = 6 identical layers, with d_model = 512.",
+      "source_document": "attention.pdf",
+      "expected_pages": [3],
+      "category": "architecture"
+    },
+    {
+      "id": "attn-006",
+      "question": "What two sub-layers does each encoder layer contain, and how is the output of each sub-layer computed?",
+      "expected_answer": "A multi-head self-attention mechanism and a position-wise fully connected feed-forward network; each sub-layer's output is LayerNorm(x + Sublayer(x)), using a residual connection followed by layer normalization.",
+      "source_document": "attention.pdf",
+      "expected_pages": [3],
+      "category": "architecture"
+    },
+    {
+      "id": "attn-007",
+      "question": "What extra sub-layer does the decoder have compared to the encoder, and why is masking applied to the decoder's self-attention?",
+      "expected_answer": "The decoder adds a third sub-layer that performs multi-head attention over the encoder's output. Masking (combined with offsetting output embeddings by one position) prevents positions from attending to subsequent positions, preserving the auto-regressive property so predictions for position i depend only on outputs before position i.",
+      "source_document": "attention.pdf",
+      "expected_pages": [3, 5],
+      "category": "architecture"
+    },
+    {
+      "id": "attn-008",
+      "question": "What is the formula for Scaled Dot-Product Attention?",
+      "expected_answer": "Attention(Q, K, V) = softmax(QK^T / sqrt(d_k)) V",
+      "source_document": "attention.pdf",
+      "expected_pages": [4],
+      "category": "math"
+    },
+    {
+      "id": "attn-009",
+      "question": "Why do the authors scale the dot products by 1/sqrt(d_k) in scaled dot-product attention?",
+      "expected_answer": "For large values of d_k, the dot products grow large in magnitude (variance d_k), pushing the softmax function into regions with extremely small gradients; scaling by 1/sqrt(d_k) counteracts this effect.",
+      "source_document": "attention.pdf",
+      "expected_pages": [4],
+      "category": "math"
+    },
+    {
+      "id": "attn-010",
+      "question": "How many attention heads does the Transformer use, and what are the dimensions d_k and d_v per head?",
+      "expected_answer": "h = 8 parallel attention heads, with d_k = d_v = d_model / h = 64.",
+      "source_document": "attention.pdf",
+      "expected_pages": [5],
+      "category": "architecture"
+    },
+    {
+      "id": "attn-011",
+      "question": "What is the formula for the position-wise feed-forward network, and what are its input/output and inner-layer dimensionalities?",
+      "expected_answer": "FFN(x) = max(0, xW1 + b1)W2 + b2, a ReLU-activated two-layer transformation with input/output dimensionality d_model = 512 and inner-layer dimensionality d_ff = 2048.",
+      "source_document": "attention.pdf",
+      "expected_pages": [5],
+      "category": "architecture"
+    },
+    {
+      "id": "attn-012",
+      "question": "How does the Transformer encode positional information, since it contains no recurrence or convolution?",
+      "expected_answer": "It adds sinusoidal positional encodings to the input embeddings, using sine functions for even dimensions and cosine functions for odd dimensions: PE(pos,2i)=sin(pos/10000^(2i/d_model)), PE(pos,2i+1)=cos(pos/10000^(2i/d_model)).",
+      "source_document": "attention.pdf",
+      "expected_pages": [6],
+      "category": "architecture"
+    },
+    {
+      "id": "attn-013",
+      "question": "According to the complexity comparison table, what is the maximum path length between any two positions for a self-attention layer versus a recurrent layer?",
+      "expected_answer": "Self-attention has a maximum path length of O(1) (constant), whereas a recurrent layer has a maximum path length of O(n), where n is the sequence length.",
+      "source_document": "attention.pdf",
+      "expected_pages": [6],
+      "category": "complexity"
+    },
+    {
+      "id": "attn-014",
+      "question": "What dropout rate and label smoothing value were used for the base model, and what effect does label smoothing have?",
+      "expected_answer": "A residual dropout rate of P_drop = 0.1 and a label smoothing value of epsilon_ls = 0.1; label smoothing hurts perplexity, since the model learns to be more unsure, but improves accuracy and BLEU score.",
+      "source_document": "attention.pdf",
+      "expected_pages": [8],
+      "category": "training"
+    },
+    {
+      "id": "attn-015",
+      "question": "In the model variation experiments, what happens to translation quality when using only a single attention head versus too many heads?",
+      "expected_answer": "Single-head attention is 0.9 BLEU worse than the best multi-head setting, and quality also drops off when using too many heads.",
+      "source_document": "attention.pdf",
+      "expected_pages": [9],
+      "category": "results"
+    },
+    {
+      "id": "attn-016",
+      "question": "How does the Transformer perform on English constituency parsing compared to prior models?",
+      "expected_answer": "Despite the lack of task-specific tuning, the Transformer performs surprisingly well, outperforming all previously reported models except the Recurrent Neural Network Grammar, and it outperforms the Berkeley-Parser even when trained only on the 40K-sentence WSJ training set.",
+      "source_document": "attention.pdf",
+      "expected_pages": [10],
+      "category": "results"
+    },
+    {
+      "id": "resume-001",
+      "question": "How many years of experience does Naveed Shaik have, and in what domains has he applied AI/data engineering?",
+      "expected_answer": "4+ years of experience designing scalable data platforms and building production-grade AI solutions, primarily across the banking and healthcare domains.",
+      "source_document": "NaveedShaik_ Resume .pdf",
+      "expected_pages": [1],
+      "category": "summary"
+    },
+    {
+      "id": "resume-002",
+      "question": "What is Naveed Shaik's current job title and employer, and since when has he held that role?",
+      "expected_answer": "AI Engineer at Wells Fargo, since July 2024 (Present).",
+      "source_document": "NaveedShaik_ Resume .pdf",
+      "expected_pages": [1],
+      "category": "experience"
+    },
+    {
+      "id": "resume-003",
+      "question": "What did Naveed build as a Supervisor Agent at Wells Fargo, and what impact did it have?",
+      "expected_answer": "He engineered a Supervisor Agent to intelligently decompose complex user requests and orchestrate specialized sub-agents, reducing average task execution time by 32% while improving workflow scalability across enterprise banking use cases.",
+      "source_document": "NaveedShaik_ Resume .pdf",
+      "expected_pages": [1],
+      "category": "experience"
+    },
+    {
+      "id": "resume-004",
+      "question": "What Faithfulness and Answer Relevancy scores did Naveed's LLM evaluation framework achieve at Wells Fargo, and what tools did he use to build it?",
+      "expected_answer": "Using Ragas and DeepEval, the evaluation framework achieved 94% Faithfulness and 92% Answer Relevancy across production evaluation datasets.",
+      "source_document": "NaveedShaik_ Resume .pdf",
+      "expected_pages": [1],
+      "category": "experience"
+    },
+    {
+      "id": "resume-005",
+      "question": "What was Naveed's role at Accenture, and what architecture did he implement in Databricks?",
+      "expected_answer": "He worked as a Data Engineer at Accenture (Jan 2022 - Dec 2023) and designed/implemented a Medallion Architecture (Bronze, Silver, Gold) in Databricks to standardize healthcare data processing.",
+      "source_document": "NaveedShaik_ Resume .pdf",
+      "expected_pages": [2],
+      "category": "experience"
+    },
+    {
+      "id": "resume-006",
+      "question": "What is the 'FinAgent AI' personal project about, and which LLM and vector database does it use?",
+      "expected_answer": "FinAgent AI is a RAG-Powered Banking Document Intelligence Platform that grounds loan-underwriting responses in user-uploaded documents and a bank policy corpus, using ChromaDB embeddings and a locally-hosted Ollama LLM (Llama 3.2) with metadata-based multi-tenant retrieval scoping.",
+      "source_document": "NaveedShaik_ Resume .pdf",
+      "expected_pages": [2],
+      "category": "projects"
+    },
+    {
+      "id": "resume-007",
+      "question": "What degrees has Naveed Shaik earned, and from which universities?",
+      "expected_answer": "A Master of Science in Data Science from the University of North Texas (2024-2025, GPA 4.0/4.0) and a Bachelor of Technology in Electronics and Communication Engineering from Presidency University, Bangalore, India (2019-2023, GPA 3.2/4.0).",
+      "source_document": "NaveedShaik_ Resume .pdf",
+      "expected_pages": [3],
+      "category": "education"
+    }
+  ]
+}
